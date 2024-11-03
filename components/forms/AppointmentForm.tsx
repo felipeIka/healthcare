@@ -88,6 +88,7 @@ const AppointmentForm = ({
       } else {
         const appointmentToUpdate = {
           userId,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
           appointmentId: appointment?.$id!,
           appointment: {
             primaryPhysician: values.primaryPhysician,
