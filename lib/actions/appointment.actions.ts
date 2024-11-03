@@ -78,7 +78,7 @@ export const getRecentAppointmentList = async () => {
       ...counts,
       documents: appointments.documents,
     };
-    revalidatePath("/admin");
+    //revalidatePath("/admin");
     return parseStringify(data);
   } catch (error) {
     console.error(
@@ -108,7 +108,7 @@ export const updateAppointment = async ({appointment, type, appointmentId, userI
     }`;
     await sendSMSNotification(userId, smsMessage)
 
-    revalidatePath("/admin")
+    //revalidatePath("/admin")
     return parseStringify(updatedAppointment)
   } catch (error) {
     console.log(error)
