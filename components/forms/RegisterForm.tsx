@@ -44,8 +44,6 @@ const RegisterForm = ({ user }: { user: User }) => {
   // Função que será executada quando o formulário for enviado
  
   const onSubmit = async (values: z.infer<typeof patientFormSchema>) => {
-    console.log("OILAS")
-    window.alert('as')
     setIsLoading(true);
   
  
