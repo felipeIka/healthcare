@@ -166,7 +166,7 @@ const AppointmentForm = ({
               name="schedule"
               label="Data para Agendamento"
               showTimeSelect
-              dateFormat="dd//MM/yyyy h:mm aa"
+              dateFormat="dd/MM/yyyy h:mm aa"
             />
 
             <div className="flex flex-col gap-6 xl:flex-row">
