@@ -331,6 +331,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           </div>
         </section>
 
+
         <CustomFormField
           fieldType={FormFIeldType.CHECKBOX}
           control={form.control}
@@ -351,6 +352,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           name="privacyConsent"
           label="Eu aceito os termos de privacidade"
         />
+        
         
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
