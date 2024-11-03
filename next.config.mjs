@@ -6,7 +6,7 @@ const nextConfig = {
 typescript: {
     ignoreBuildErrors: true, // Corrigido de 'ignoreBuildErros' para 'ignoreBuildErrors'
   },
-  eslint: {
+  esLint: {
     ignoreBuildErrors: true, // Corrigido de 'ignoreBuildErros' para 'ignoreBuildErrors'
   },
 };
