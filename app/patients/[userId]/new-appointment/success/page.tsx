@@ -45,6 +45,7 @@ const Sucess = async ({
           <p>Detalhes da Consulta:</p>
           <div className="flex items-center gap-3">
             <Image
+              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
               src={doctor?.image!}
               alt="doctor"
               height={100}
