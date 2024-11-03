@@ -26,8 +26,8 @@ export const createUser = async (user: CreateUserParams) => {
     console.log({ newUser });
 
     return parseStringify(newUser);
-  } catch (error: any) {
-    if (error && error?.code === 409) {
+  } catch (error: unknown) {
+    if (error && typeof error === "object" && "code" in error && (error as { code: number }).code === 409) {
       const existingUser = await users.list([
         Query.equal("email", [user.email]),
       ]);
