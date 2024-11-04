@@ -1,4 +1,4 @@
-"use client"; // Essa linha torna este componente um Client Component
+"use client"; // Indica que este é um componente cliente
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -14,21 +14,34 @@ import { columns } from "@/components/table/columns";
 
 const Admin = () => {
   const [appointments, setAppointments] = useState({ scheduledCount: 0, pendingCount: 0, cancelledCount: 0, documents: [] });
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Função para buscar os compromissos
   const fetchAppointments = async () => {
-    const data = await getRecentAppointmentList();
-    setAppointments(data);
+    try {
+      const data = await getRecentAppointmentList();
+      setAppointments(data);
+    } catch (error) {
+      console.error("Erro ao buscar compromissos:", error);
+    } finally {
+      setIsLoading(false); // Parar o loading ao finalizar
+    }
   };
 
+  // useEffect para buscar os compromissos na montagem do componente
   useEffect(() => {
-    fetchAppointments(); // Fetch initial data
+    fetchAppointments(); // Chama a função fetchAppointments quando o componente é montado
 
     const intervalId = setInterval(() => {
-      fetchAppointments(); // Fetch data every 5 seconds
+      fetchAppointments(); // Chama a função a cada 5 segundos
     }, 5000);
 
-    return () => clearInterval(intervalId); // Clear interval on component unmount
+    return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar o componente
   }, []);
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Você pode adicionar um loader aqui
+  }
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -81,3 +94,4 @@ const Admin = () => {
 };
 
 export default Admin;
+
