@@ -1,5 +1,7 @@
+"use client"; // Essa linha torna este componente um Client Component
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "@/public/assets/icons/logo-full.svg";
 import Image from "next/image";
 import StatCard from "@/components/StatCard";
@@ -10,8 +12,23 @@ import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
 import { DataTable } from "@/components/table/DataTable";
 import { columns } from "@/components/table/columns";
 
-const Admin = async () => {
-  const appointments = await getRecentAppointmentList();
+const Admin = () => {
+  const [appointments, setAppointments] = useState({ scheduledCount: 0, pendingCount: 0, cancelledCount: 0, documents: [] });
+
+  const fetchAppointments = async () => {
+    const data = await getRecentAppointmentList();
+    setAppointments(data);
+  };
+
+  useEffect(() => {
+    fetchAppointments(); // Fetch initial data
+
+    const intervalId = setInterval(() => {
+      fetchAppointments(); // Fetch data every 5 seconds
+    }, 5000);
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, []);
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -39,19 +56,19 @@ const Admin = async () => {
         <section className="admin-stat">
           <StatCard
             type="appointments"
-            count={appointments.scheduledCount?? 0}
+            count={appointments.scheduledCount ?? 0}
             label="Agendamentos Marcados"
             icon={appointmentss}
           />
           <StatCard
             type="pending"
-            count={appointments.pendingCount?? 0}
+            count={appointments.pendingCount ?? 0}
             label="Agendamentos Pendentes"
             icon={pending}
           />
           <StatCard
             type="cancelled"
-            count={appointments.cancelledCount?? 0}
+            count={appointments.cancelledCount ?? 0}
             label="Agendamentos Cancelados"
             icon={cancelled}
           />
