@@ -15,6 +15,7 @@ import Image from "next/image";
 import { getAppointmentSchema } from "@/lib/validation";
 import { createAppointment, updateAppointment } from "@/lib/actions/appointment.actions";
 import { Appointment } from "@/types/appwrite.types";
+import { revalidatePath } from "next/cache";
 
 
 const AppointmentForm = ({
