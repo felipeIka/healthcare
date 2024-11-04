@@ -13,34 +13,40 @@ import { DataTable } from "@/components/table/DataTable";
 import { columns } from "@/components/table/columns";
 
 const Admin = () => {
-  const [appointments, setAppointments] = useState({ scheduledCount: 0, pendingCount: 0, cancelledCount: 0, documents: [] });
+  const [appointments, setAppointments] = useState({
+    scheduledCount: 0,
+    pendingCount: 0,
+    cancelledCount: 0,
+    documents: [],
+  });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Função para buscar os compromissos
-  const fetchAppointments = async () => {
-    try {
-      const data = await getRecentAppointmentList();
-      setAppointments(data);
-    } catch (error) {
-      console.error("Erro ao buscar compromissos:", error);
-    } finally {
-      setIsLoading(false); // Parar o loading ao finalizar
-    }
+  // Função que busca os compromissos
+  const fetchAppointments = () => {
+    setIsLoading(true); // Inicia o loading
+    getRecentAppointmentList()
+      .then((data) => {
+        setAppointments(data); // Atualiza o estado com os dados
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar compromissos:", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Para o loading ao finalizar
+      });
   };
 
   // useEffect para buscar os compromissos na montagem do componente
   useEffect(() => {
     fetchAppointments(); // Chama a função fetchAppointments quando o componente é montado
 
-    const intervalId = setInterval(() => {
-      fetchAppointments(); // Chama a função a cada 5 segundos
-    }, 5000);
+    const intervalId = setInterval(fetchAppointments, 5000); // Chama a função a cada 5 segundos
 
     return () => clearInterval(intervalId); // Limpa o intervalo ao desmontar o componente
   }, []);
 
   if (isLoading) {
-    return <div>Carregando...</div>; // Você pode adicionar um loader aqui
+    return <div>Carregando...</div>; // Mensagem ou loader enquanto os dados estão sendo carregados
   }
 
   return (
@@ -94,4 +100,5 @@ const Admin = () => {
 };
 
 export default Admin;
+
 
