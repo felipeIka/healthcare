@@ -79,6 +79,10 @@ export const getRecentAppointmentList = async () => {
       documents: appointments.documents,
     };
     //revalidatePath("/admin");
+     await fetch("/api/revalidate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
     return parseStringify(data);
   } catch (error) {
     console.error(
@@ -109,6 +113,10 @@ export const updateAppointment = async ({appointment, type, appointmentId, userI
     await sendSMSNotification(userId, smsMessage)
 
     //revalidatePath("/admin")
+     await fetch("/api/revalidate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
     return parseStringify(updatedAppointment)
   } catch (error) {
     console.log(error)
