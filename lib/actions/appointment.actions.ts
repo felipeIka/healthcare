@@ -79,7 +79,7 @@ export const getRecentAppointmentList = async () => {
       documents: appointments.documents,
     };
     //revalidatePath("/admin");
-     await fetch("/api/revalidate", {
+     await fetch("https://healthcare-omega-seven.vercel.app/admin/api/revalidate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
@@ -113,7 +113,7 @@ export const updateAppointment = async ({appointment, type, appointmentId, userI
     await sendSMSNotification(userId, smsMessage)
 
     //revalidatePath("/admin")
-     await fetch("/api/revalidate", {
+     await fetch("https://healthcare-omega-seven.vercel.app/admin/api/revalidate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
