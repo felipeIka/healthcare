@@ -9,7 +9,7 @@ import {
 } from "../appwrite.config";
 import { formatDateTime, parseStringify } from "../utils";
 import {Appointment} from "@/types/appwrite.types"
-import { revalidatePath } from "next/cache";
+//import { revalidatePath } from "next/cache";
 
 
 export const createAppointment = async (
