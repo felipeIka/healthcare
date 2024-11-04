@@ -103,7 +103,7 @@ const AppointmentForm = ({
         if (updatedAppointment) {
           setOpen && setOpen(false);
           form.reset();
-          router.push("/admin")
+          revalidatePath("/admin");
         }
       }
     } catch (error) {
