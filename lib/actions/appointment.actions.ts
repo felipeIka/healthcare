@@ -78,11 +78,7 @@ export const getRecentAppointmentList = async () => {
       ...counts,
       documents: appointments.documents,
     };
-    //revalidatePath("/admin");
-     await fetch("https://healthcare-omega-seven.vercel.app/admin/api/revalidate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
+    //revalidatePath("/admin")
     return parseStringify(data);
   } catch (error) {
     console.error(
@@ -113,10 +109,6 @@ export const updateAppointment = async ({appointment, type, appointmentId, userI
     await sendSMSNotification(userId, smsMessage)
 
     //revalidatePath("/admin")
-     await fetch("https://healthcare-omega-seven.vercel.app/admin/api/revalidate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    });
     return parseStringify(updatedAppointment)
   } catch (error) {
     console.log(error)
